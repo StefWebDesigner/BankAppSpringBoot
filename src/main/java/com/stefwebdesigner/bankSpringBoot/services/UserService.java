@@ -1,7 +1,7 @@
-package com.stefwebdesigner.bankSpringBoot.beans.services;
+package com.stefwebdesigner.bankSpringBoot.services;
 
-import com.stefwebdesigner.bankSpringBoot.beans.entities.UserEntities;
-import com.stefwebdesigner.bankSpringBoot.beans.repositories.userRepository;
+import com.stefwebdesigner.bankSpringBoot.entities.UserEntities;
+import com.stefwebdesigner.bankSpringBoot.repositories.userRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +12,16 @@ public class UserService {
     @Autowired
     public UserService(userRepository userRepo) {this.userRepo = userRepo;}
 
-
+    //GETTING USERID
     public UserEntities getUserById(Integer userId) {
         return userRepo.findById(userId).get();
     }
+
+    //SAVING NEW USER INFORMATION
+    public UserEntities save(UserEntities user) {
+        return userRepo.save(user);
+    }
+
+
+
 }

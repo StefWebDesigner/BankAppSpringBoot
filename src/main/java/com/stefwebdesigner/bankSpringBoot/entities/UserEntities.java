@@ -1,4 +1,4 @@
-package com.stefwebdesigner.bankSpringBoot.beans.entities;
+package com.stefwebdesigner.bankSpringBoot.entities;
 
 import javax.persistence.*;
 
@@ -7,7 +7,7 @@ public class UserEntities {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    private Integer id;
     @Column
     private String username;
     @Column
@@ -16,8 +16,8 @@ public class UserEntities {
     private String password;
 
     //CONSTRUCTORS FOR ALL USER ENTITIES
-    public UserEntities(Integer userId, String username, String email, String password) {
-        this.userId = userId;
+    public UserEntities(String username, String email, String password) {
+//        this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -28,12 +28,12 @@ public class UserEntities {
         this.password = password;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUsername() {
