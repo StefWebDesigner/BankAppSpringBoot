@@ -24,19 +24,26 @@ public class UserService {
     //GETTING USERID
     public UserModel getUserById(Integer id) {
         Optional<UserModel> userOptional = userRepo.findById(id);
+        //OPTIONAL IS NEEDED BECAUSE IF NULL IN THE CHANGE YOU DOUNLE CHECK
+        //TO SEE IF IT HAS BEEN REMOVED---YOU GET A NULL
+        //THIS IS A SHORTHAND OF DOING THAT
         return userOptional.orElse(null);
     }
 
     //SAVING NEW USER INFORMATION
     public UserModel save(UserModel userModel) {
-        // create user in db
+        // TO CREATE A USER IN DB MARIA
         UserModel savedUserModel = userRepo.save(userModel);
-        // create a bank account for user
+        //CREATE A BANK ACCOUNT FOR THE USER
+        //CONNECTING MY BANKACCOUNTMODEL TO USERMODEL
         BankAccountModel bankAccountModel = new BankAccountModel();
         bankAccountModel.setUserModel(savedUserModel);
+        // TODO: ADD THE OTHER BANKACCOUNT ELEMENTS HERE
         bankAccountModel.setCreatedDate(LocalDate.now());
-        bankAccountModel.setType("SAVING");
+        bankAccountModel.setSavingAccount("SAVING");
+        bankAccountModel.setCheckAccount("CHECKING");
         bankAccountModel.setAmount(0.0);
+
         bankAccountRepository.save(bankAccountModel);
 
         return savedUserModel;

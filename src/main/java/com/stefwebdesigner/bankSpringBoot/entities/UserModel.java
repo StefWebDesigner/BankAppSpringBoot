@@ -15,6 +15,7 @@ public class UserModel {
     @Column
     private String password;
 
+    //YOU WANT OVER THE DEFAULT CONSTRUCTOR
     public UserModel() {
     }
 
