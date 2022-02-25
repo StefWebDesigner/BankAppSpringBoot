@@ -3,10 +3,10 @@ package com.stefwebdesigner.bankSpringBoot.entities;
 import javax.persistence.*;
 
 @Entity
-public class UserEntities {
+public class UserModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column
     private String username;
@@ -15,17 +15,7 @@ public class UserEntities {
     @Column
     private String password;
 
-    //CONSTRUCTORS FOR ALL USER ENTITIES
-    public UserEntities(String username, String email, String password) {
-//        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
-
-    public UserEntities(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public UserModel() {
     }
 
     public Integer getId() {
@@ -59,4 +49,5 @@ public class UserEntities {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }
