@@ -28,13 +28,21 @@ public class BankAccountModel {
         this.id = id;
     }
 
-//    public String getType() {
-//        return type;
-//    }
-//
-//    public void setType(String type) {
-//        this.type = type;
-//    }
+    public String getSavingAccount() {
+        return savingAccount;
+    }
+
+    public void setSavingAccount(String savingAccount) {
+        this.savingAccount = savingAccount;
+    }
+
+    public String getCheckAccount() {
+        return checkAccount;
+    }
+
+    public void setCheckAccount(String checkAccount) {
+        this.checkAccount = checkAccount;
+    }
 
     public double getAmount() {
         return amount;
@@ -58,21 +66,5 @@ public class BankAccountModel {
 
     public void setUserModel(UserModel userModel) {
         this.userModel = userModel;
-    }
-
-    public String getSavingAccount() {
-        return savingAccount;
-    }
-
-    public void setSavingAccount(String savingAccount) {
-        this.savingAccount = savingAccount;
-    }
-
-    public String getCheckAccount() {
-        return checkAccount;
-    }
-
-    public void setCheckAccount(String checkAccount) {
-        this.checkAccount = checkAccount;
     }
 }

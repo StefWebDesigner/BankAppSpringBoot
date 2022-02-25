@@ -31,7 +31,19 @@ public class BankController {
             return ResponseEntity.ok("User id is wrong");
         }
         return ResponseEntity.ok(result);
-
     }
+
+    //TODO: ADD THE POST DEPOSIT CHECKING METHOD
+
+
+
+
+
+    //TODO: ADD THE POST DEPOSIT SAVING METHOD
+
+    //TODO: ADD THE POST WITHDRAW CHECKING METHOD
+
+    //TODO: ADD THE POST WITHDRAW SAVING METHOD
+
 
 }

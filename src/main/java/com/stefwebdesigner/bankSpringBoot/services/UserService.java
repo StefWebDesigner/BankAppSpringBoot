@@ -40,8 +40,8 @@ public class UserService {
         bankAccountModel.setUserModel(savedUserModel);
         // TODO: ADD THE OTHER BANKACCOUNT ELEMENTS HERE
         bankAccountModel.setCreatedDate(LocalDate.now());
-        bankAccountModel.setSavingAccount("SAVING");
-        bankAccountModel.setCheckAccount("CHECKING");
+        bankAccountModel.setSavingAccount(String.valueOf(0.0));
+        bankAccountModel.setCheckAccount(String.valueOf(0.0));
         bankAccountModel.setAmount(0.0);
 
         bankAccountRepository.save(bankAccountModel);
