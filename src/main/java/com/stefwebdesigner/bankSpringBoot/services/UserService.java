@@ -38,11 +38,10 @@ public class UserService {
         //CONNECTING MY BANKACCOUNTMODEL TO USERMODEL
         BankAccountModel bankAccountModel = new BankAccountModel();
         bankAccountModel.setUserModel(savedUserModel);
-        // TODO: ADD THE OTHER BANKACCOUNT ELEMENTS HERE
         bankAccountModel.setCreatedDate(LocalDate.now());
         bankAccountModel.setSavingAccount(String.valueOf(0.0));
         bankAccountModel.setCheckAccount(String.valueOf(0.0));
-        bankAccountModel.setAmount(0.0);
+        bankAccountModel.setAmount();
 
         bankAccountRepository.save(bankAccountModel);
 

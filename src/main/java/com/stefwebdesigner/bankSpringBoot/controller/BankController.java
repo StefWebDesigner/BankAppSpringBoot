@@ -4,10 +4,7 @@ import com.stefwebdesigner.bankSpringBoot.entities.BankAccountModel;
 import com.stefwebdesigner.bankSpringBoot.services.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,12 +27,24 @@ public class BankController {
         if (result == null) {
             return ResponseEntity.ok("User id is wrong");
         }
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok("Successfuy");
     }
 
+
     //TODO: ADD THE POST DEPOSIT CHECKING METHOD
+    //ISSUE IS THAT SAVEDEPOISTCHECKING  IS A DBLE AND THE OBJECT IS A SSTRINGH
+    @RequestMapping(value = "/account/depoChecking", method = RequestMethod.POST)
+    public ResponseEntity<List<BankAccountModel>> saveDeposit(@RequestBody BankAccountModel bankAccountModel) {
+        return ResponseEntity.ok(bankService.saveDeposit(bankAccountModel));
+    }
 
 
+//    //TODO: ADD THE POST DEPOSIT CHECKING METHOD
+//    //ISSUE IS THAT SAVEDEPOISTCHECKING  IS A DBLE AND THE OBJECT IS A SSTRINGH
+//    @RequestMapping(value = "/account/depoChecking", method = RequestMethod.POST)
+//    public ResponseEntity<List<BankAccountModel>> saveDepositChecking(@RequestBody BankAccountModel bankAccountModel) {
+//        return ResponseEntity.ok(bankService.saveDepositChecking(bankAccountModel));
+//    }
 
 
 

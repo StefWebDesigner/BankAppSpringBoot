@@ -21,11 +21,50 @@ public class BankService {
         this.userRepository = userRepository;
     }
 
+    //***I'M THINKING TO JUST SCRAP ALL THIS AND TRY AGAIN ***
+
     public List<BankAccountModel> getBankAccountDetails(Integer userId) {
         Optional<UserModel> user = userRepository.findById(userId);
-        if (!user.isPresent()) {
-            return null;
-        }
-        return bankRepository.findByUserModel(user.get());
+        return user.map(bankRepository::findByUserModel).orElse(null);
     }
+
+    public List<BankAccountModel> saveDeposit(BankAccountModel bankAccountModel) {
+        BankAccountModel saveDeposit = bankRepository.save(bankAccountModel);
+
+        bankAccountModel.setUserModel(new UserModel());
+        bankAccountModel.setAmount();
+        bankAccountModel.setCheckAccount("");
+        bankAccountModel.setSavingAccount("");
+
+        return (List<BankAccountModel>) saveDeposit;
+    }
+
+
+//    //should it be wrapped with the list
+//    public  List<BankAccountModel> saveDepositChecking(BankAccountModel bankAccountModel) {
+//        BankAccountModel saveDeposit = bankRepository.save(bankAccountModel);
+//        bankAccountModel.setBankAccountModel(saveDeposit);
+//        bankAccountModel.setAmount();
+//        bankAccountModel.setCheckAccount("");
+//
+//         bankRepository.save(bankAccountModel);
+//
+//        return (List<BankAccountModel>) saveDeposit;
+//    }
+
+
+
+
+
+
+//    public BankAccountModel saveDepositChecking (BankAccountModel bankAccountModel) {
+//        UserModel savedDepositModel = bankRepository(userModel);
+//        bankAccountModel = new BankAccountModel();
+//        bankRepository.setCheckAccount();
+//
+//        bankRepository.save(bankAccountModel);
+//
+//        return savedDepositModel;
+//    }
+
 }

@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface BankAccountRepository extends JpaRepository<BankAccountModel, Integer> {
     List<BankAccountModel> findByUserModel(UserModel userModel);
+
+
 }
