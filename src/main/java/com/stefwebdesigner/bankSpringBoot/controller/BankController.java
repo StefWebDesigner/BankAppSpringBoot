@@ -31,28 +31,22 @@ public class BankController {
     }
 
 
-    //TODO: ADD THE POST DEPOSIT CHECKING METHOD
-    //ISSUE IS THAT SAVEDEPOISTCHECKING  IS A DBLE AND THE OBJECT IS A SSTRINGH
-    @RequestMapping(value = "/account/depoChecking", method = RequestMethod.POST)
+    //THE GENERIC DEPOSIT REQUEST
+    //TODO: ADD CONDITIONS TO SPECIFY WHICH ACCOUNT
+    @RequestMapping(value = "/account/deposit", method = RequestMethod.POST)
     public ResponseEntity<List<BankAccountModel>> saveDeposit(@RequestBody BankAccountModel bankAccountModel) {
         return ResponseEntity.ok(bankService.saveDeposit(bankAccountModel));
     }
 
+    //THE GENERIC WITHDRAW REQUEST
+    //TODO: ADD CONDITIONS TO SPECIFY WHICH ACCOUNT
+    @RequestMapping(value = "/account/withdraw", method = RequestMethod.POST)
+    public ResponseEntity <List<BankAccountModel>> saveWithdraw(@RequestBody BankAccountModel bankAccountModel) {
+        return ResponseEntity.ok(bankService.saveWithdraw(bankAccountModel));
+    }
 
-//    //TODO: ADD THE POST DEPOSIT CHECKING METHOD
-//    //ISSUE IS THAT SAVEDEPOISTCHECKING  IS A DBLE AND THE OBJECT IS A SSTRINGH
-//    @RequestMapping(value = "/account/depoChecking", method = RequestMethod.POST)
-//    public ResponseEntity<List<BankAccountModel>> saveDepositChecking(@RequestBody BankAccountModel bankAccountModel) {
-//        return ResponseEntity.ok(bankService.saveDepositChecking(bankAccountModel));
-//    }
-
-
-
-    //TODO: ADD THE POST DEPOSIT SAVING METHOD
-
-    //TODO: ADD THE POST WITHDRAW CHECKING METHOD
-
-    //TODO: ADD THE POST WITHDRAW SAVING METHOD
-
+    //TODO: ADD THE SHOW ALL CURRENT ACCOUNT
+    @RequestMapping(value = "/account/displayaccounts", method = RequestMethod.POST)
+    public ResponseEntity <List<BankAccountModel>> showAllAccount()
 
 }

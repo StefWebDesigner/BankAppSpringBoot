@@ -39,6 +39,19 @@ public class BankService {
         return (List<BankAccountModel>) saveDeposit;
     }
 
+    public List<BankAccountModel> saveWithdraw(BankAccountModel bankAccountModel) {
+        BankAccountModel saveWithdraw = bankRepository.save(bankAccountModel);
+
+        bankAccountModel.setUserModel(new UserModel());
+        bankAccountModel.setAmount();
+        bankAccountModel.setCheckAccount("");
+        bankAccountModel.setSavingAccount("");
+
+        return (List<BankAccountModel>) saveWithdraw;
+    }
+
+
+
 
 //    //should it be wrapped with the list
 //    public  List<BankAccountModel> saveDepositChecking(BankAccountModel bankAccountModel) {
