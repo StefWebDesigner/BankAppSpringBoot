@@ -1,6 +1,8 @@
 
 Features to add:
-- Add logger & catch blocks for everything
+- add constraints to avoid overdraft for the withdraw function
+- add catch blocks for everything
+- Add logger
 
 ====== IN PROGRESS ========
 

@@ -1,5 +1,6 @@
 package com.stefwebdesigner.bankSpringBoot.services;
 
+import com.stefwebdesigner.bankSpringBoot.entities.AccountType;
 import com.stefwebdesigner.bankSpringBoot.entities.BankAccountModel;
 import com.stefwebdesigner.bankSpringBoot.entities.UserModel;
 import com.stefwebdesigner.bankSpringBoot.repositories.BankAccountRepository;
@@ -25,13 +26,14 @@ public class BankService {
         this.userRepository = userRepository;
     }
 
+    //TO GET A SPECIFIC BANK ACCOUNT BY ID
     public List<BankAccountModel> getBankAccountDetails(Integer userId) {
         Optional<UserModel> user = userRepository.findById(userId);
         return user.map(bankRepository::findByUserModel).orElse(null);
     }
 
+    //TO DEPOSIT MONEY TO AN ACCOUNT
     public String saveDeposit(Integer bankId, Double amount) {
-
         Optional<BankAccountModel> bank =  bankRepository.findById(bankId);
         if(bank.isPresent()) {
             Double currentAmount = bank.get().getAmount();
@@ -45,10 +47,9 @@ public class BankService {
         }
     }
 
-
+    //TO WITHDRAW MONEY OUT OF AN SPECIFIC ACCOUNT
     //TODO: ADD MORE CONDITIONS SO IT CAN'T GO INTO ITS OVERDRAFT
     public String saveWithdraw(Integer bankId, Double amount) {
-
         Optional<BankAccountModel> bank = bankRepository.findById(bankId);
         if(bank.isPresent()) {
             Double currentAmount = bank.get().getAmount();
@@ -62,21 +63,28 @@ public class BankService {
 
     }
 
-
+    //TO RETRIEVE ALL BANK ACCOUNT
     public List<BankAccountModel> getAllAccounts() {
         List<BankAccountModel> getAllAccounts = bankRepository.findAll();
         return getAllAccounts;
     }
 
-//    public List<BankAccountModel> getAccountByDate(LocalDate createDate) {
-//        List<BankAccountModel> getAccountByDate = bankRepository.findAll();
-//        return getAccountByDate(LocalDate.parse(createDate.toString()));
-//    }
+    //TO RETRIEVE ALL ACCOUNT BY DATE
+    //TODO: FIX THE PARSE BUG WHEN EXECUTING THE REQUEST
+    public List<BankAccountModel> getAccountsByDate(LocalDate createDate) {
+        List<BankAccountModel> getAccountsByDate = bankRepository.findAll();
+        return getAccountsByDate(createDate);
+    }
 
-    public List<BankAccountModel> getAccountByDate(LocalDate createDate) {
-        List<BankAccountModel> getAccountByDate = bankRepository.findAll();
-
-        return getAccountByDate(createDate);
+    //TO RETRIEVE ALL ACCOUNT BY BANK ACCOUNT
+    //TODO: FIX THE PARSE BUG WHEN EXECUTING THE REQUEST
+    public List<BankAccountModel> getAccountsByType(AccountType accountType) {
+        List<BankAccountModel> getAccountsByType = bankRepository.findAll();
+        if(accountType.equals("CHECKING")) {
+            return getAccountsByType(AccountType.CHECKING);
+        } else {
+            return getAccountsByType(AccountType.SAVING);
+        }
     }
 
 }
