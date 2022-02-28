@@ -33,14 +33,14 @@ public class BankController {
     //THE  DEPOSIT REQUEST
 //    localhost:8080/account/deposit?id=9&amount=50.0
     @RequestMapping(value = "/account/deposit", method = RequestMethod.POST)
-    public ResponseEntity<String> saveDeposit(@RequestParam("id") Integer bankId, @RequestParam("amount") Double amount) {
+    public ResponseEntity<String> saveDeposit(@RequestParam("id") Integer bankId, @RequestParam("amount") Double amount) throws NoSuchFieldException {
         return ResponseEntity.ok(bankService.saveDeposit(bankId, amount));
     }
 
     //STRING
     //THE  WITHDRAW REQUEST
     @RequestMapping(value = "/account/withdraw", method = RequestMethod.POST)
-    public ResponseEntity <String> saveWithdraw(@RequestParam("id") Integer bankId, @RequestParam("amount") Double amount) {
+    public ResponseEntity <String> saveWithdraw(@RequestParam("id") Integer bankId, @RequestParam("amount") Double amount) throws Exception {
         return ResponseEntity.ok(bankService.saveWithdraw(bankId, amount));
     }
 
@@ -51,16 +51,17 @@ public class BankController {
     }
 
     //GET ALL ACCOUNT BY DATE
-    @RequestMapping(value = "/account/date", method = RequestMethod.GET)
-    public ResponseEntity<List<BankAccountModel>> getAccountsByDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate createDate) {
-        return ResponseEntity.ok(bankService.getAccountsByDate(createDate));
-    }
+//    @RequestMapping(value = "/account/date", method = RequestMethod.GET)
+//    public ResponseEntity<List<BankAccountModel>> getAccountsByDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate createDate) {
+//        return ResponseEntity.ok(bankService.getAccountsByDate(createDate));
+//    }
 
 //2022-02-28
 
     //GET ALL ACCOUNT BY CHECKING
-    @RequestMapping(value = "/account/type", method = RequestMethod.GET)
-    public ResponseEntity<List<BankAccountModel>> getAccountsByType(@RequestParam("type") AccountType accountType ) {
-        return ResponseEntity.ok(bankService.getAccountsByType(accountType));
-    }
+//    @RequestMapping(value = "/account/type", method = RequestMethod.GET)
+//    public ResponseEntity<List<BankAccountModel>> getAccountsByType(@RequestParam("type") AccountType accountType ) {
+//        return ResponseEntity.ok(bankService.getAccountsByType(accountType));
+//    }
+
 }
