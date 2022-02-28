@@ -1,0 +1,17 @@
+
+Extra Features to include:
+
+Make an endpoint to find all account on a certain date
+make an end point that specifies a particular account type and date
+
+/account/date -> THis should take a query param date
+returns List<BankAccountModel>
+
+Postman
+/account/date?date=2022/09/12
+
+/account/type -> this should take a query param type
+returns List<bankAccountModel>
+
+Postman
+/account/type?type=CHECKING

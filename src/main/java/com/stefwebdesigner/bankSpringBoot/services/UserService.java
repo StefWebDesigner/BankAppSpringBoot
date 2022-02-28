@@ -1,5 +1,6 @@
 package com.stefwebdesigner.bankSpringBoot.services;
 
+import com.stefwebdesigner.bankSpringBoot.entities.AccountType;
 import com.stefwebdesigner.bankSpringBoot.entities.BankAccountModel;
 import com.stefwebdesigner.bankSpringBoot.entities.UserModel;
 import com.stefwebdesigner.bankSpringBoot.repositories.BankAccountRepository;
@@ -31,7 +32,7 @@ public class UserService {
     }
 
     //SAVING NEW USER INFORMATION
-    public UserModel save(UserModel userModel) {
+    public UserModel save(UserModel userModel, String type) {
         // TO CREATE A USER IN DB MARIA
         UserModel savedUserModel = userRepo.save(userModel);
         //CREATE A BANK ACCOUNT FOR THE USER
@@ -39,9 +40,14 @@ public class UserService {
         BankAccountModel bankAccountModel = new BankAccountModel();
         bankAccountModel.setUserModel(savedUserModel);
         bankAccountModel.setCreatedDate(LocalDate.now());
-        bankAccountModel.setSavingAccount(String.valueOf(0.0));
-        bankAccountModel.setCheckAccount(String.valueOf(0.0));
-        bankAccountModel.setAmount();
+        bankAccountModel.setAmount(0.0);
+
+        //SPECIFTYING THE ACCOUNT WITH THE ENUM TYPE & NEWLY ADDED PARAMATER
+        if (type.equals("CHECKING")) {
+            bankAccountModel.setAccountType(AccountType.CHECKING);
+        } else {
+            bankAccountModel.setAccountType(AccountType.SAVING);
+        }
 
         bankAccountRepository.save(bankAccountModel);
 

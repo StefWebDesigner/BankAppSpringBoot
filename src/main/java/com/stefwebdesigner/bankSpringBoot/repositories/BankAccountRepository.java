@@ -11,5 +11,4 @@ import java.util.List;
 public interface BankAccountRepository extends JpaRepository<BankAccountModel, Integer> {
     List<BankAccountModel> findByUserModel(UserModel userModel);
 
-
 }

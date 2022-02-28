@@ -9,6 +9,8 @@ target/
 *.properties
 application.properties
 api-key.properties
+Question.txt
+httpRequetsNotes.txt
 
 ### STS ###
 .apt_generated

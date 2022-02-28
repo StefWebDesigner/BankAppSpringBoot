@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/account")
 public class BankController {
     private final BankService bankService;
 
@@ -22,7 +21,7 @@ public class BankController {
     //GET THE ACCOUNT NEEDED ()
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Object> getDepositeAccount(@PathVariable("id") Integer userId) {
+    public ResponseEntity<Object> getAccount(@PathVariable("id") Integer userId) {
         List<BankAccountModel> result = bankService.getBankAccountDetails(userId);
         if (result == null) {
             return ResponseEntity.ok("User id is wrong");
@@ -30,23 +29,26 @@ public class BankController {
         return ResponseEntity.ok("Successfuy");
     }
 
-
-    //THE GENERIC DEPOSIT REQUEST
-    //TODO: ADD CONDITIONS TO SPECIFY WHICH ACCOUNT
+    //THE  DEPOSIT REQUEST
+//    localhost:8080/account/deposit?id=9&amount=50.0
     @RequestMapping(value = "/account/deposit", method = RequestMethod.POST)
-    public ResponseEntity<List<BankAccountModel>> saveDeposit(@RequestBody BankAccountModel bankAccountModel) {
-        return ResponseEntity.ok(bankService.saveDeposit(bankAccountModel));
+    public ResponseEntity<String> saveDeposit(@RequestParam("id") Integer bankId, @RequestParam("amount") Double amount) {
+        return ResponseEntity.ok(bankService.saveDeposit(bankId, amount));
     }
 
-    //THE GENERIC WITHDRAW REQUEST
-    //TODO: ADD CONDITIONS TO SPECIFY WHICH ACCOUNT
+    //STRING
+    //THE  WITHDRAW REQUEST
     @RequestMapping(value = "/account/withdraw", method = RequestMethod.POST)
-    public ResponseEntity <List<BankAccountModel>> saveWithdraw(@RequestBody BankAccountModel bankAccountModel) {
-        return ResponseEntity.ok(bankService.saveWithdraw(bankAccountModel));
+    public ResponseEntity <String> saveWithdraw(@RequestParam("id") Integer bankId, @RequestParam("amount") Double amount) {
+        return ResponseEntity.ok(bankService.saveWithdraw(bankId, amount));
     }
 
-    //TODO: ADD THE SHOW ALL CURRENT ACCOUNT
-    @RequestMapping(value = "/account/displayaccounts", method = RequestMethod.POST)
-    public ResponseEntity <List<BankAccountModel>> showAllAccount()
+
+    //GET ALL ACCOUNT
+    @RequestMapping(value = "/account/all", method = RequestMethod.GET)
+    public ResponseEntity<List<BankAccountModel>> getAllAccounts() {
+        return ResponseEntity.ok(bankService.getAllAccounts());
+    }
+
 
 }

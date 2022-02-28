@@ -4,6 +4,7 @@ import com.stefwebdesigner.bankSpringBoot.entities.BankAccountModel;
 import com.stefwebdesigner.bankSpringBoot.entities.UserModel;
 import com.stefwebdesigner.bankSpringBoot.repositories.BankAccountRepository;
 import com.stefwebdesigner.bankSpringBoot.repositories.UserRepository;
+import org.apache.catalina.webresources.ClasspathURLStreamHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,34 +22,50 @@ public class BankService {
         this.userRepository = userRepository;
     }
 
-    //***I'M THINKING TO JUST SCRAP ALL THIS AND TRY AGAIN ***
-
     public List<BankAccountModel> getBankAccountDetails(Integer userId) {
         Optional<UserModel> user = userRepository.findById(userId);
         return user.map(bankRepository::findByUserModel).orElse(null);
     }
 
-    public List<BankAccountModel> saveDeposit(BankAccountModel bankAccountModel) {
-        BankAccountModel saveDeposit = bankRepository.save(bankAccountModel);
+    public String saveDeposit(Integer bankId, Double amount) {
 
-        bankAccountModel.setUserModel(new UserModel());
-        bankAccountModel.setAmount();
-        bankAccountModel.setCheckAccount("");
-        bankAccountModel.setSavingAccount("");
+        Optional<BankAccountModel> bank =  bankRepository.findById(bankId);
+        if(bank.isPresent()) {
+            Double currentAmount = bank.get().getAmount();
+            currentAmount = currentAmount + amount;
+            bank.get().setAmount(currentAmount);
+            bankRepository.save(bank.get());
+            return "Amount has been deposited";
+        } else {
 
-        return (List<BankAccountModel>) saveDeposit;
+            return "Bank ID is wrong";
+        }
     }
 
-    public List<BankAccountModel> saveWithdraw(BankAccountModel bankAccountModel) {
-        BankAccountModel saveWithdraw = bankRepository.save(bankAccountModel);
 
-        bankAccountModel.setUserModel(new UserModel());
-        bankAccountModel.setAmount();
-        bankAccountModel.setCheckAccount("");
-        bankAccountModel.setSavingAccount("");
+    //TODO: ADD MORE CONDITIONS SO IT CAN'T GO INTO ITS OVERDRAFT
+    public String saveWithdraw(Integer bankId, Double amount) {
 
-        return (List<BankAccountModel>) saveWithdraw;
+        Optional<BankAccountModel> bank = bankRepository.findById(bankId);
+        if(bank.isPresent()) {
+            Double currentAmount = bank.get().getAmount();
+            currentAmount = currentAmount - amount;
+            bank.get().setAmount(currentAmount);
+            bankRepository.save(bank.get());
+            return "Withdraw is successful";
+        } else {
+            return "Withdraw failed";
+        }
+
     }
+
+
+    public List<BankAccountModel> getAllAccounts() {
+        List<BankAccountModel> getAllAccounts = bankRepository.findAll();
+        return getAllAccounts;
+    }
+
+
 
 
 

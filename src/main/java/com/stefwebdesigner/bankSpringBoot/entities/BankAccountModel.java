@@ -8,30 +8,17 @@ public class BankAccountModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String savingAccount;
-    private String checkAccount;
     private double amount;
     private LocalDate createdDate;
-
-    //TRANSACTIONAL OBJECTS
-    @Column
-    private double depositChecking;
-    @Column
-    private double depositSaving;
-    @Column
-    private double withdrawChecking;
-    @Column
-    private double withdrawSaving;
+    private AccountType accountType;
 
     //ESTABLISHES THE TABLE RELATION BETWEEN THE TWO TABLES
     @ManyToOne
     UserModel userModel;
 
-//    private BankAccountModel bankAccountModel; //I ADDED THIS
 
     public BankAccountModel() {
     }
-
 
     public Integer getId() {
         return id;
@@ -41,27 +28,11 @@ public class BankAccountModel {
         this.id = id;
     }
 
-    public String getSavingAccount() {
-        return savingAccount;
-    }
-
-    public void setSavingAccount(String savingAccount) {
-        this.savingAccount = savingAccount;
-    }
-
-    public String getCheckAccount() {
-        return checkAccount;
-    }
-
-    public void setCheckAccount(String checkAccount) {
-        this.checkAccount = checkAccount;
-    }
-
     public double getAmount() {
         return amount;
     }
 
-    public void setAmount() { //IT ORIGINALLY HAD AN DOUBLE AMOUNT
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -73,6 +44,14 @@ public class BankAccountModel {
         this.createdDate = createdDate;
     }
 
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
+
     public UserModel getUserModel() {
         return userModel;
     }
@@ -80,50 +59,4 @@ public class BankAccountModel {
     public void setUserModel(UserModel userModel) {
         this.userModel = userModel;
     }
-//
-//    public BankAccountModel getBankAccountModel() {
-//        return bankAccountModel;
-//    }
-//
-//    public void setBankAccountModel(BankAccountModel bankAccountModel) {
-//        this.bankAccountModel = bankAccountModel;
-//    }
-
-
-
-    //TRANSACTIONAL GETTERS AND SETTERS
-
-
-    public double getDepositChecking() {
-        return depositChecking;
-    }
-
-    public void setDepositChecking(double depositChecking) {
-        this.depositChecking = depositChecking;
-    }
-
-    public double getDepositSaving() {
-        return depositSaving;
-    }
-
-    public void setDepositSaving(double depositSaving) {
-        this.depositSaving = depositSaving;
-    }
-
-    public double getWithdrawChecking() {
-        return withdrawChecking;
-    }
-
-    public void setWithdrawChecking(double withdrawChecking) {
-        this.withdrawChecking = withdrawChecking;
-    }
-
-    public double getWithdrawSaving() {
-        return withdrawSaving;
-    }
-
-    public void setWithdrawSaving(double withdrawSaving) {
-        this.withdrawSaving = withdrawSaving;
-    }
-
 }

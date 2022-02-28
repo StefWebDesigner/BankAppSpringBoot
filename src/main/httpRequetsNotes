@@ -1,0 +1,27 @@
+
+
+Get client id:
+localhost:8080/client/5
+
+get bank account by user id:
+localhost:8080/account/3
+
+post client: (to create a specific account for the user)
+localhost:8080/client/new?type=CHECKING
+{
+    "username": "Lee",
+    "email": "Lee@icloud.com",
+    "password": "passw"
+}
+
+delete client:
+localhost:8080/client/1
+
+post deposit:
+localhost:8080/account/deposit?id=9&amount=50.0
+
+post withdraw:
+localhost:8080/account/withdraw?id=9&amount=10
+
+get all accounts:
+localhost:8080/account/all
