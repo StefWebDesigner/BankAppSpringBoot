@@ -1,5 +1,8 @@
 
-Extra Features to include:
+Features to add:
+- Add logger & catch blocks for everything
+
+====== IN PROGRESS ========
 
 Make an endpoint to find all account on a certain date
 make an end point that specifies a particular account type and date
@@ -9,6 +12,13 @@ returns List<BankAccountModel>
 
 Postman
 /account/date?date=2022/09/12
+
+NOTES:
+- the code is fine however struggling to parse the locale date
+to a string
+- to be be revisited
+
+---------
 
 /account/type -> this should take a query param type
 returns List<bankAccountModel>

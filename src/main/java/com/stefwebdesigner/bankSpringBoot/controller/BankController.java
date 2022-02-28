@@ -3,6 +3,7 @@ package com.stefwebdesigner.bankSpringBoot.controller;
 import com.stefwebdesigner.bankSpringBoot.entities.BankAccountModel;
 import com.stefwebdesigner.bankSpringBoot.services.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,7 +51,7 @@ public class BankController {
 
     //GET ALL ACCOUNT BY DATE
     @RequestMapping(value = "/account/date", method = RequestMethod.GET)
-    public ResponseEntity<List<BankAccountModel>> getAccountByDate(@RequestParam("date") LocalDate createDate) {
+    public ResponseEntity<List<BankAccountModel>> getAccountByDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate createDate) {
         return ResponseEntity.ok(bankService.getAccountByDate(createDate));
     }
 

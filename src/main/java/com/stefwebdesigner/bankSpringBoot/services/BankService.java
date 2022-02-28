@@ -5,10 +5,12 @@ import com.stefwebdesigner.bankSpringBoot.entities.UserModel;
 import com.stefwebdesigner.bankSpringBoot.repositories.BankAccountRepository;
 import com.stefwebdesigner.bankSpringBoot.repositories.UserRepository;
 import org.apache.catalina.webresources.ClasspathURLStreamHandler;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -66,12 +68,15 @@ public class BankService {
         return getAllAccounts;
     }
 
+//    public List<BankAccountModel> getAccountByDate(LocalDate createDate) {
+//        List<BankAccountModel> getAccountByDate = bankRepository.findAll();
+//        return getAccountByDate(LocalDate.parse(createDate.toString()));
+//    }
+
     public List<BankAccountModel> getAccountByDate(LocalDate createDate) {
         List<BankAccountModel> getAccountByDate = bankRepository.findAll();
 
-
         return getAccountByDate(createDate);
     }
-
 
 }
