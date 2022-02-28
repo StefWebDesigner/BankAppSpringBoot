@@ -8,6 +8,7 @@ import org.apache.catalina.webresources.ClasspathURLStreamHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -65,36 +66,12 @@ public class BankService {
         return getAllAccounts;
     }
 
+    public List<BankAccountModel> getAccountByDate(LocalDate createDate) {
+        List<BankAccountModel> getAccountByDate = bankRepository.findAll();
 
 
+        return getAccountByDate(createDate);
+    }
 
-
-
-//    //should it be wrapped with the list
-//    public  List<BankAccountModel> saveDepositChecking(BankAccountModel bankAccountModel) {
-//        BankAccountModel saveDeposit = bankRepository.save(bankAccountModel);
-//        bankAccountModel.setBankAccountModel(saveDeposit);
-//        bankAccountModel.setAmount();
-//        bankAccountModel.setCheckAccount("");
-//
-//         bankRepository.save(bankAccountModel);
-//
-//        return (List<BankAccountModel>) saveDeposit;
-//    }
-
-
-
-
-
-
-//    public BankAccountModel saveDepositChecking (BankAccountModel bankAccountModel) {
-//        UserModel savedDepositModel = bankRepository(userModel);
-//        bankAccountModel = new BankAccountModel();
-//        bankRepository.setCheckAccount();
-//
-//        bankRepository.save(bankAccountModel);
-//
-//        return savedDepositModel;
-//    }
 
 }

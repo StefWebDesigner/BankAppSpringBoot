@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -17,9 +18,7 @@ public class BankController {
         this.bankService = bankService;
     }
 
-
     //GET THE ACCOUNT NEEDED ()
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> getAccount(@PathVariable("id") Integer userId) {
         List<BankAccountModel> result = bankService.getBankAccountDetails(userId);
@@ -43,12 +42,19 @@ public class BankController {
         return ResponseEntity.ok(bankService.saveWithdraw(bankId, amount));
     }
 
-
     //GET ALL ACCOUNT
     @RequestMapping(value = "/account/all", method = RequestMethod.GET)
     public ResponseEntity<List<BankAccountModel>> getAllAccounts() {
         return ResponseEntity.ok(bankService.getAllAccounts());
     }
+
+    //GET ALL ACCOUNT BY DATE
+    @RequestMapping(value = "/account/date", method = RequestMethod.GET)
+    public ResponseEntity<List<BankAccountModel>> getAccountByDate(@RequestParam("date") LocalDate createDate) {
+        return ResponseEntity.ok(bankService.getAccountByDate(createDate));
+    }
+
+//2022-02-28
 
 
 }
