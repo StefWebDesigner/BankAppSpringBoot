@@ -1,6 +1,6 @@
 
 Features to add:
-- add constraints to avoid overdraft for the withdraw function
+- (COMPLETE)add constraints to avoid overdraft for the withdraw function
 - add catch blocks for everything
 - Add logger
 

@@ -49,6 +49,7 @@ public class BankService {
 
     }
 
+    //*** THIS IS A COPY OF THE DEPOSIT METHOD --- SERVES AS A BACKUPS***
 //    public String saveDeposit(Integer bankId, Double amount) {
 //        Optional<BankAccountModel> bank =  bankRepository.findById(bankId);
 //        if(bank.isPresent()) {
@@ -66,8 +67,8 @@ public class BankService {
 
 
     //TO WITHDRAW MONEY OUT OF AN SPECIFIC ACCOUNT
-    //TODO: ADD MORE CONDITIONS SO IT CAN'T GO INTO ITS OVERDRAFT
-    public String saveWithdraw(Integer bankId, Double amount) {
+    //TODO: ATTEMPTED ADDING THE TRY CATCH BLOCK--- IT DOESN'T REGISTER OVERDRAFTS REQUEST...BUT DISPLAY EXCEPTIONS
+    public String saveWithdraw(Integer bankId, Double amount) throws Exception {
         Optional<BankAccountModel> bank = bankRepository.findById(bankId);
         if(bank.isPresent()) {
             Double currentAmount = bank.get().getAmount();
@@ -86,6 +87,7 @@ public class BankService {
         }
 
     }
+
 
     //TO RETRIEVE ALL BANK ACCOUNT
     public List<BankAccountModel> getAllAccounts() {
