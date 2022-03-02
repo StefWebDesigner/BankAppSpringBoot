@@ -1,8 +1,7 @@
 
 Features to add:
-- (COMPLETE)add constraints to avoid overdraft for the withdraw function
-- add catch blocks for everything
 - Add logger
+- add catch blocks for everything
 
 ====== IN PROGRESS ========
 
@@ -27,3 +26,13 @@ returns List<bankAccountModel>
 
 Postman
 /account/type?type=CHECKING
+----
+CreditCardModel
+    id
+    creditCardNumber
+    limit = 100000
+    BankAccountModel
+
+    - Effect the user controlller
+    Connect the creditcard model to the bank model
+

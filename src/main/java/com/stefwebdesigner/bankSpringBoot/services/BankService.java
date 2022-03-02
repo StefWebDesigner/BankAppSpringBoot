@@ -5,15 +5,13 @@ import com.stefwebdesigner.bankSpringBoot.entities.BankAccountModel;
 import com.stefwebdesigner.bankSpringBoot.entities.UserModel;
 import com.stefwebdesigner.bankSpringBoot.repositories.BankAccountRepository;
 import com.stefwebdesigner.bankSpringBoot.repositories.UserRepository;
-import org.apache.catalina.webresources.ClasspathURLStreamHandler;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class BankService {
 
@@ -34,7 +32,7 @@ public class BankService {
 
     //TO DEPOSIT MONEY TO AN ACCOUNT
     public String saveDeposit(Integer bankId, Double amount) throws NoSuchFieldException {
-        Optional<BankAccountModel> bank =  bankRepository.findById(bankId);
+        Optional<BankAccountModel> bank = bankRepository.findById(bankId);
         try {
             if (bank.isPresent()) {
                 Double currentAmount = bank.get().getAmount();
@@ -42,48 +40,37 @@ public class BankService {
                 bank.get().setAmount(currentAmount);
                 bankRepository.save(bank.get());
             }
-        } catch(Exception e){
-                throw new NoSuchFieldException("No bank id detected");
-            }
+        } catch (Exception e) {
+            throw new NoSuchFieldException("No bank id detected");
+        }
         return "Amount has been deposited";
 
     }
 
-    //*** THIS IS A COPY OF THE DEPOSIT METHOD --- SERVES AS A BACKUPS***
-//    public String saveDeposit(Integer bankId, Double amount) {
-//        Optional<BankAccountModel> bank =  bankRepository.findById(bankId);
-//        if(bank.isPresent()) {
-//            Double currentAmount = bank.get().getAmount();
-//            currentAmount = currentAmount + amount;
-//            bank.get().setAmount(currentAmount);
-//            bankRepository.save(bank.get());
-//            return "Amount has been deposited";
-//        } else {
-//
-//            return "Bank ID is wrong";
-//        }
-//    }
-
-
-
-    //TO WITHDRAW MONEY OUT OF AN SPECIFIC ACCOUNT
-    //TODO: ATTEMPTED ADDING THE TRY CATCH BLOCK--- IT DOESN'T REGISTER OVERDRAFTS REQUEST...BUT DISPLAY EXCEPTIONS
     public String saveWithdraw(Integer bankId, Double amount) throws Exception {
         Optional<BankAccountModel> bank = bankRepository.findById(bankId);
-        if(bank.isPresent()) {
-            Double currentAmount = bank.get().getAmount();
-            currentAmount = currentAmount - amount;
-            if (currentAmount >= amount) {
-                bank.get().setAmount(currentAmount);
-                bankRepository.save(bank.get());
+        try {
+            if (bank.isPresent()) {
+                try {
+                    Double currentAmount = bank.get().getAmount();
+                    currentAmount = currentAmount - amount;
+                    if (currentAmount >= amount) {
+                        bank.get().setAmount(currentAmount);
+                        bankRepository.save(bank.get());
+                        return "Withdraw is successful";
+                    } else {
+                        throw new Exception();
+                    }
+                } catch (Exception e) {
+                    System.out.println("withdraw has reached withdraw overdraft net");
+                    return "withdraw has reached withdraw overdraft net";
+                }
             } else {
-                System.out.println("withdraw has reached withdraw overdraft net");
-                return null;
+                throw new Exception();
             }
-            return "Withdraw is successful";
-        } else {
+        } catch (Exception e) {
             System.out.println("Bank was not present");
-            return null;
+            return "Bank Not present";
         }
 
     }
@@ -91,26 +78,17 @@ public class BankService {
 
     //TO RETRIEVE ALL BANK ACCOUNT
     public List<BankAccountModel> getAllAccounts() {
-        List<BankAccountModel> getAllAccounts = bankRepository.findAll();
-        return getAllAccounts;
+        return bankRepository.findAll();
     }
 
     //TO RETRIEVE ALL ACCOUNT BY DATE
-    //TODO: FIX THE PARSE BUG WHEN EXECUTING THE REQUEST
-//    public List<BankAccountModel> getAccountsByDate(LocalDate createDate) {
-//        List<BankAccountModel> getAccountsByDate = bankRepository.findAll();
-//        return getAccountsByDate(createDate);
-//    }
+    public List<BankAccountModel> getAccountsByDate(LocalDate createDate) {
+        return bankRepository.findByCreatedDate(createDate);
+    }
 
     //TO RETRIEVE ALL ACCOUNT BY BANK ACCOUNT
-    //TODO: FIX THE PARSE BUG WHEN EXECUTING THE REQUEST
-//    public List<BankAccountModel> getAccountsByType(AccountType accountType) {
-//        List<BankAccountModel> getAccountsByType = bankRepository.findAll();
-//        if(accountType.equals("CHECKING")) {
-//            return getAccountsByType(AccountType.CHECKING);
-//        } else {
-//            return getAccountsByType(AccountType.SAVING);
-//        }
-//    }
+    public List<BankAccountModel> getAccountsByType(AccountType accountType) {
+        return bankRepository.findByAccountType(accountType);
+    }
 
 }

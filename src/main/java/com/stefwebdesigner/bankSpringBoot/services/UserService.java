@@ -32,7 +32,7 @@ public class UserService {
     }
 
     //SAVING NEW USER INFORMATION
-    public UserModel save(UserModel userModel, String type) {
+    public UserModel save(UserModel userModel, String type) { // third parameter boolean requiresCredCard
         // TO CREATE A USER IN DB MARIA
         UserModel savedUserModel = userRepo.save(userModel);
         //CREATE A BANK ACCOUNT FOR THE USER
@@ -49,7 +49,12 @@ public class UserService {
             bankAccountModel.setAccountType(AccountType.SAVING);
         }
 
+
+
         bankAccountRepository.save(bankAccountModel);
+
+
+        // create credit card model
 
         return savedUserModel;
     }

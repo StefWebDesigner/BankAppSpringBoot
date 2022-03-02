@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -51,17 +52,19 @@ public class BankController {
     }
 
     //GET ALL ACCOUNT BY DATE
-//    @RequestMapping(value = "/account/date", method = RequestMethod.GET)
-//    public ResponseEntity<List<BankAccountModel>> getAccountsByDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate createDate) {
-//        return ResponseEntity.ok(bankService.getAccountsByDate(createDate));
-//    }
+    @RequestMapping(value = "/account/date", method = RequestMethod.GET)
+    public ResponseEntity<List<BankAccountModel>> getAccountsByDate(@RequestParam("date") String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate createDate = LocalDate.parse(date, formatter);
+        return ResponseEntity.ok(bankService.getAccountsByDate(createDate));
+    }
 
 //2022-02-28
 
     //GET ALL ACCOUNT BY CHECKING
-//    @RequestMapping(value = "/account/type", method = RequestMethod.GET)
-//    public ResponseEntity<List<BankAccountModel>> getAccountsByType(@RequestParam("type") AccountType accountType ) {
-//        return ResponseEntity.ok(bankService.getAccountsByType(accountType));
-//    }
+    @RequestMapping(value = "/account/type", method = RequestMethod.GET)
+    public ResponseEntity<List<BankAccountModel>> getAccountsByType(@RequestParam("type") AccountType accountType ) {
+        return ResponseEntity.ok(bankService.getAccountsByType(accountType));
+    }
 
 }
