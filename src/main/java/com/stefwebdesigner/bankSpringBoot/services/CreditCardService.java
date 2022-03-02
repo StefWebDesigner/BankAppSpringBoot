@@ -16,6 +16,7 @@ public class CreditCardService {
     private final BankAccountRepository bankAccountRepository;
     private final CreditCardRepository creditCardRepository;
 
+    @Autowired
     public CreditCardService(BankAccountRepository bankAccountRepository, CreditCardRepository creditCardRepository) {
         this.bankAccountRepository = bankAccountRepository;
         this.creditCardRepository = creditCardRepository;
@@ -24,7 +25,5 @@ public class CreditCardService {
     public List<CreditCardModel> getCreditCardDetails(Integer bankId) {
         Optional<BankAccountModel> bankUser = bankAccountRepository.findById(bankId);
         return bankUser.map(bankAccountRepository::findByBankModel).orElse(null);
-
-        return null;
     }
 }

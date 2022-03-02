@@ -5,10 +5,16 @@ import java.util.Iterator;
 
 @Entity
 public class CreditCardModel {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private Long creditCardNumber;
     private Integer limit;
     private BankAccountModel bankAccountModel;
+
+
+    //TODO: ENCOUNTERED AN ERROR --- MAY NEED TO CONNECT IT WITH MANY TO ONLY THING
+
 
     public CreditCardModel () {
 
