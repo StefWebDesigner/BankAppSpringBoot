@@ -5,22 +5,26 @@ import com.stefwebdesigner.bankSpringBoot.entities.BankAccountModel;
 import com.stefwebdesigner.bankSpringBoot.entities.CreditCardModel;
 import com.stefwebdesigner.bankSpringBoot.entities.UserModel;
 import com.stefwebdesigner.bankSpringBoot.repositories.BankAccountRepository;
+import com.stefwebdesigner.bankSpringBoot.repositories.CreditCardRepository;
 import com.stefwebdesigner.bankSpringBoot.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class UserService {
     private final UserRepository userRepo;
     private final BankAccountRepository bankAccountRepository;
+    private final CreditCardRepository creditCardRepository;
 
     @Autowired
-    public UserService(UserRepository userRepo, BankAccountRepository bankAccountRepository) {
+    public UserService(UserRepository userRepo, BankAccountRepository bankAccountRepository, CreditCardRepository creditCardRepository) {
         this.userRepo = userRepo;
         this.bankAccountRepository = bankAccountRepository;
+        this.creditCardRepository = creditCardRepository;
     }
 
     //GETTING USERID
@@ -52,13 +56,27 @@ public class UserService {
         }
 
 
-
         bankAccountRepository.save(bankAccountModel);
 
-
+//        CreditCardModel creditCardModel = new CreditCardModel();
+//        creditCardModel.setBankAccountModel(bankAccountModel);
+//        //GENERATES RANDOM NUMBER FOR CREDIT CARDS
+//        Random random = new Random();
+//        creditCardModel.setCreditCardNumber(random.nextLong());
+//        creditCardModel.setLimit(3000);
 
         //TODO: ADD IF CONDITION IF CREDIT CARD IS TRUE
-
+        if(requiresCard) {
+            CreditCardModel creditCardModel = new CreditCardModel();
+            creditCardModel.setBankAccountModel(bankAccountModel);
+            //GENERATES RANDOM NUMBER FOR CREDIT CARDS
+            Random random = new Random();
+            creditCardModel.setCreditCardNumber(random.nextLong());
+            creditCardModel.setLimit(3000);
+            creditCardRepository.save(creditCardModel);
+        } else {
+            return null;
+        }
 
         return savedUserModel;
     }

@@ -6,7 +6,7 @@ import java.util.Iterator;
 @Entity
 public class CreditCardModel {
     private Integer id;
-    private Integer creditCardNumber;
+    private Long creditCardNumber;
     private Integer limit;
     private BankAccountModel bankAccountModel;
 
@@ -22,11 +22,11 @@ public class CreditCardModel {
         this.id = id;
     }
 
-    public Integer getCreditCardNumber() {
+    public Long getCreditCardNumber() {
         return creditCardNumber;
     }
 
-    public void setCreditCardNumber(Integer creditCardNumber) {
+    public void setCreditCardNumber(Long creditCardNumber) {
         this.creditCardNumber = creditCardNumber;
     }
 
