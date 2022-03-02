@@ -5,16 +5,14 @@ import java.util.Iterator;
 
 @Entity
 public class CreditCardModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private Integer creditCardNumber;
     private Integer limit;
+    private BankAccountModel bankAccountModel;
 
+    public CreditCardModel () {
 
-    @ManyToOne
-    BankAccountModel bankAccountModel;
+    }
 
     public Integer getId() {
         return id;

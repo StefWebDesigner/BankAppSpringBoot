@@ -2,6 +2,7 @@ package com.stefwebdesigner.bankSpringBoot.services;
 
 import com.stefwebdesigner.bankSpringBoot.entities.AccountType;
 import com.stefwebdesigner.bankSpringBoot.entities.BankAccountModel;
+import com.stefwebdesigner.bankSpringBoot.entities.CreditCardModel;
 import com.stefwebdesigner.bankSpringBoot.entities.UserModel;
 import com.stefwebdesigner.bankSpringBoot.repositories.BankAccountRepository;
 import com.stefwebdesigner.bankSpringBoot.repositories.UserRepository;
@@ -32,7 +33,8 @@ public class UserService {
     }
 
     //SAVING NEW USER INFORMATION
-    public UserModel save(UserModel userModel, String type) { // third parameter boolean requiresCredCard
+    //TODO: ADD A THIRD BOOLEAN CREDIT PARAMETER
+    public UserModel save(UserModel userModel, String type, Boolean requiresCard) { // third parameter boolean requiresCredCard
         // TO CREATE A USER IN DB MARIA
         UserModel savedUserModel = userRepo.save(userModel);
         //CREATE A BANK ACCOUNT FOR THE USER
@@ -54,7 +56,9 @@ public class UserService {
         bankAccountRepository.save(bankAccountModel);
 
 
-        // create credit card model
+
+        //TODO: ADD IF CONDITION IF CREDIT CARD IS TRUE
+
 
         return savedUserModel;
     }

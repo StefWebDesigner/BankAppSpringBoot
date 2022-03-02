@@ -30,8 +30,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public ResponseEntity<UserModel> save(@RequestBody UserModel userModel, @RequestParam String type) {
-        return ResponseEntity.ok(userService.save(userModel, type));
+    public ResponseEntity<UserModel> save(@RequestBody UserModel userModel, @RequestParam String type, Boolean requiresCard) {
+        return ResponseEntity.ok(userService.save(userModel, type, requiresCard));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
