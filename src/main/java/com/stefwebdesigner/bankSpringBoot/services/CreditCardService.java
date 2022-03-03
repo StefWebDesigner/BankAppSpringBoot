@@ -4,6 +4,7 @@ import com.stefwebdesigner.bankSpringBoot.entities.BankAccountModel;
 import com.stefwebdesigner.bankSpringBoot.entities.CreditCardModel;
 import com.stefwebdesigner.bankSpringBoot.repositories.BankAccountRepository;
 import com.stefwebdesigner.bankSpringBoot.repositories.CreditCardRepository;
+import com.stefwebdesigner.bankSpringBoot.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,6 @@ public class CreditCardService {
 
     public List<CreditCardModel> getCreditCardDetails(Integer bankId) {
         Optional<BankAccountModel> bankUser = bankAccountRepository.findById(bankId);
-        return bankUser.map(bankAccountRepository::findByBankModel).orElse(null);
+        return bankUser.map(creditCardRepository::findByBankModel).orElse(null);
     }
 }

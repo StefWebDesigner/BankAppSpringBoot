@@ -16,5 +16,6 @@ public interface BankAccountRepository extends JpaRepository<BankAccountModel, I
     List<BankAccountModel> findByCreatedDate(LocalDate createdDate);
     List<BankAccountModel> findByAccountType(AccountType accountType);
 
-     List<CreditCardModel> findByBankModel(BankAccountModel bankAccountModel);
+
+//     List<CreditCardModel> findByBankModel(BankAccountModel bankAccountModel);
 }

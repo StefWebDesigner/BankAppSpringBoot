@@ -15,6 +15,10 @@ public class UserModel {
     @Column
     private String password;
 
+//    @OneToMany
+//    BankAccountModel bankAccountModel;
+//    CreditCardModel creditCardModel;
+
     //YOU WANT OVER THE DEFAULT CONSTRUCTOR
     public UserModel() {
     }
@@ -51,4 +55,21 @@ public class UserModel {
         this.password = password;
     }
 
+//  EXPERIMENTAL STUFF
+
+//    public BankAccountModel getBankAccountModel() {
+//        return bankAccountModel;
+//    }
+//
+//    public void setBankAccountModel(BankAccountModel bankAccountModel) {
+//        this.bankAccountModel = bankAccountModel;
+//    }
+//
+//    public CreditCardModel getCreditCardModel() {
+//        return creditCardModel;
+//    }
+//
+//    public void setCreditCardModel(CreditCardModel creditCardModel) {
+//        this.creditCardModel = creditCardModel;
+//    }
 }

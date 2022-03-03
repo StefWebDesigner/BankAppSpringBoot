@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public ResponseEntity<UserModel> save(@RequestBody UserModel userModel, @RequestParam String type, Boolean requiresCard) {
+    public ResponseEntity<UserModel> save(@RequestBody UserModel userModel, @RequestParam String type, @RequestParam Boolean requiresCard) {
         return ResponseEntity.ok(userService.save(userModel, type, requiresCard));
     }
 

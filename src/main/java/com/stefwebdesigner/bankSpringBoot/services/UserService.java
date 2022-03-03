@@ -55,15 +55,7 @@ public class UserService {
             bankAccountModel.setAccountType(AccountType.SAVING);
         }
 
-
         bankAccountRepository.save(bankAccountModel);
-
-//        CreditCardModel creditCardModel = new CreditCardModel();
-//        creditCardModel.setBankAccountModel(bankAccountModel);
-//        //GENERATES RANDOM NUMBER FOR CREDIT CARDS
-//        Random random = new Random();
-//        creditCardModel.setCreditCardNumber(random.nextLong());
-//        creditCardModel.setLimit(3000);
 
         //TODO: ADD IF CONDITION IF CREDIT CARD IS TRUE
         if(requiresCard) {

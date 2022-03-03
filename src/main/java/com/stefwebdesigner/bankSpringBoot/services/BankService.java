@@ -4,6 +4,7 @@ import com.stefwebdesigner.bankSpringBoot.entities.AccountType;
 import com.stefwebdesigner.bankSpringBoot.entities.BankAccountModel;
 import com.stefwebdesigner.bankSpringBoot.entities.UserModel;
 import com.stefwebdesigner.bankSpringBoot.repositories.BankAccountRepository;
+import com.stefwebdesigner.bankSpringBoot.repositories.CreditCardRepository;
 import com.stefwebdesigner.bankSpringBoot.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,13 +18,16 @@ public class BankService {
 
     private final BankAccountRepository bankRepository;
     private final UserRepository userRepository;
+    private final CreditCardRepository creditCardRepository;
 
     @Autowired
-    public BankService(BankAccountRepository bankRepository, UserRepository userRepository) {
+    public BankService(BankAccountRepository bankRepository, UserRepository userRepository, CreditCardRepository creditCardRepository) {
         this.bankRepository = bankRepository;
         this.userRepository = userRepository;
+        this.creditCardRepository = creditCardRepository;
     }
 
+    //TODO:MAYBE i NEED TO MESSA AROUND WITH THIS
     //TO GET A SPECIFIC BANK ACCOUNT BY ID
     public List<BankAccountModel> getBankAccountDetails(Integer userId) {
         Optional<UserModel> user = userRepository.findById(userId);

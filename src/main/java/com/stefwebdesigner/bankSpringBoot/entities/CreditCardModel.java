@@ -10,14 +10,15 @@ public class CreditCardModel {
     private Integer id;
     private Long creditCardNumber;
     private Integer limit;
-    private BankAccountModel bankAccountModel;
+//    private BankAccountModel bankAccountModel;
 
 
     //TODO: ENCOUNTERED AN ERROR --- MAY NEED TO CONNECT IT WITH MANY TO ONLY THING
+    @ManyToOne
+    BankAccountModel bankAccountModel;
 
 
     public CreditCardModel () {
-
     }
 
     public Integer getId() {
