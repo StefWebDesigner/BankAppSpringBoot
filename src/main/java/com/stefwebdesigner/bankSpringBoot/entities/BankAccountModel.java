@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class BankAccountModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer bankAccountModelId;
     private double amount;
     private LocalDate createdDate;
     private AccountType accountType;
@@ -21,12 +21,12 @@ public class BankAccountModel {
     public BankAccountModel() {
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getBankAccountModelId() {
+        return bankAccountModelId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setBankAccountModelId(Integer bankAccountModelId) {
+        this.bankAccountModelId = bankAccountModelId;
     }
 
     public double getAmount() {
