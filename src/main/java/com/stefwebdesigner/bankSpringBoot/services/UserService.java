@@ -57,18 +57,25 @@ public class UserService {
 
         bankAccountRepository.save(bankAccountModel);
 
-        //TODO: ADD IF CONDITION IF CREDIT CARD IS TRUE
-        if(requiresCard) {
-            CreditCardModel creditCardModel = new CreditCardModel();
+        //FOR PROMPTING AND SAVING OF CREDIT CARD MODAL
+        CreditCardModel creditCardModel = new CreditCardModel();
+
+        if(requiresCard.equals("TRUE")) {
+//            CreditCardModel creditCardModel = new CreditCardModel();
             creditCardModel.setBankAccountModel(bankAccountModel);
-            //GENERATES RANDOM NUMBER FOR CREDIT CARDS
+            creditCardModel.setRequiredCard(true); //DON'T THINK I NEED THIS
+
             Random random = new Random();
             creditCardModel.setCreditCardNumber(random.nextLong());
             creditCardModel.setLimit(3000);
             creditCardRepository.save(creditCardModel);
         } else {
-            return null;
+            creditCardModel.setRequiredCard(false);
+
         }
+
+
+
 
         return savedUserModel;
     }

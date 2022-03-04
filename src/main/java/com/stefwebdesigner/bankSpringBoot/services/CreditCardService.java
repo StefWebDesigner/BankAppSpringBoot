@@ -25,6 +25,6 @@ public class CreditCardService {
 
     public List<CreditCardModel> getCreditCardDetails(Integer bankId) {
         Optional<BankAccountModel> bankUser = bankAccountRepository.findById(bankId);
-        return bankUser.map(creditCardRepository::findByBankModel).orElse(null);
+        return bankUser.map(creditCardRepository::findByBankAccountModel).orElse(null);
     }
 }

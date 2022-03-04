@@ -12,6 +12,7 @@ public class BankAccountModel {
     private LocalDate createdDate;
     private AccountType accountType;
 
+
     //ESTABLISHES THE TABLE RELATION BETWEEN THE TWO TABLES
     @ManyToOne
     UserModel userModel;

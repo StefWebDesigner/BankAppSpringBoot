@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface CreditCardRepository extends JpaRepository<CreditCardModel, Integer> {
 
-    List<CreditCardModel> findByBankModel (BankAccountModel bankAccountModel);
+    List<CreditCardModel> findByBankAccountModel (BankAccountModel bankAccountModel);
 
 
 }

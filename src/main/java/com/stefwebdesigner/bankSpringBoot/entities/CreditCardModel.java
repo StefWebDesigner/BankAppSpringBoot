@@ -10,15 +10,12 @@ public class CreditCardModel {
     private Integer id;
     private Long creditCardNumber;
     private Integer limit;
-//    private BankAccountModel bankAccountModel;
+    private Boolean requiredCard;
 
-
-    //TODO: ENCOUNTERED AN ERROR --- MAY NEED TO CONNECT IT WITH MANY TO ONLY THING
     @ManyToOne
     BankAccountModel bankAccountModel;
 
-
-    public CreditCardModel () {
+    public CreditCardModel() {
     }
 
     public Integer getId() {
@@ -51,5 +48,13 @@ public class CreditCardModel {
 
     public void setBankAccountModel(BankAccountModel bankAccountModel) {
         this.bankAccountModel = bankAccountModel;
+    }
+
+    public Boolean getRequiredCard() {
+        return requiredCard;
+    }
+
+    public void setRequiredCard(Boolean requiredCard) {
+        this.requiredCard = requiredCard;
     }
 }
