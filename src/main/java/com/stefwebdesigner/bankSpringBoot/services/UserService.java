@@ -1,10 +1,8 @@
 package com.stefwebdesigner.bankSpringBoot.services;
 
-import com.stefwebdesigner.bankSpringBoot.entities.AccountType;
-import com.stefwebdesigner.bankSpringBoot.entities.BankAccountModel;
-import com.stefwebdesigner.bankSpringBoot.entities.CreditCardModel;
-import com.stefwebdesigner.bankSpringBoot.entities.UserModel;
+import com.stefwebdesigner.bankSpringBoot.entities.*;
 import com.stefwebdesigner.bankSpringBoot.repositories.BankAccountRepository;
+import com.stefwebdesigner.bankSpringBoot.repositories.CreditCardNumberRepository;
 import com.stefwebdesigner.bankSpringBoot.repositories.CreditCardRepository;
 import com.stefwebdesigner.bankSpringBoot.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,19 +10,21 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Optional;
-import java.util.Random;
 
 @Service
 public class UserService {
+
     private final UserRepository userRepo;
     private final BankAccountRepository bankAccountRepository;
     private final CreditCardRepository creditCardRepository;
+    private final CreditCardNumberRepository creditCardNumberRepository;
 
     @Autowired
-    public UserService(UserRepository userRepo, BankAccountRepository bankAccountRepository, CreditCardRepository creditCardRepository) {
+    public UserService(UserRepository userRepo, BankAccountRepository bankAccountRepository, CreditCardRepository creditCardRepository, CreditCardNumberRepository creditCardNumberRepository) {
         this.userRepo = userRepo;
         this.bankAccountRepository = bankAccountRepository;
         this.creditCardRepository = creditCardRepository;
+        this.creditCardNumberRepository = creditCardNumberRepository;
     }
 
     //GETTING USERID
@@ -60,23 +60,21 @@ public class UserService {
         //FOR PROMPTING AND SAVING OF CREDIT CARD MODAL
         CreditCardModel creditCardModel = new CreditCardModel();
 
-        if(requiresCard.equals("TRUE")) {
+        if(requiresCard) {
 //            CreditCardModel creditCardModel = new CreditCardModel();
             creditCardModel.setBankAccountModel(bankAccountModel);
-            creditCardModel.setRequiredCard(true); //DON'T THINK I NEED THIS
+            Optional<CreditCardNumber> creditCardNumber = creditCardNumberRepository.findById(1L);
+            creditCardModel.setCreditCardNumber(creditCardNumber.get().getNumber());
+            creditCardNumber.get().setNumber(creditCardNumber.get().getNumber() + 1);
+            creditCardNumberRepository.save(creditCardNumber.get());
 
-            Random random = new Random();
-            creditCardModel.setCreditCardNumber(random.nextLong());
-            creditCardModel.setLimit(3000);
+            if(type.equals("CHECKING")){
+                creditCardModel.setMoneyLimit(3000);
+            } else {
+                creditCardModel.setMoneyLimit(1000);
+            }
             creditCardRepository.save(creditCardModel);
-        } else {
-            creditCardModel.setRequiredCard(false);
-
         }
-
-
-
-
         return savedUserModel;
     }
 

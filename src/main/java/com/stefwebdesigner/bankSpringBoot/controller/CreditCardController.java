@@ -20,7 +20,7 @@ public class CreditCardController {
     @Autowired
     public CreditCardController(CreditCardService creditCardService) {this.creditCardService = creditCardService;}
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "creditcard/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> getBankAccount(@PathVariable("id") Integer bankId) {
         List<CreditCardModel> result = creditCardService.getCreditCardDetails(bankId);
 
@@ -28,7 +28,7 @@ public class CreditCardController {
             return ResponseEntity.ok("Couldn't find the Id");
         }
 
-        return ResponseEntity.ok("Found Bank ID successfully");
+        return ResponseEntity.ok(result);
     }
 
 

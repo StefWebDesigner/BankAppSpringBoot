@@ -1,29 +1,24 @@
 package com.stefwebdesigner.bankSpringBoot.entities;
 
 import javax.persistence.*;
-import java.util.Iterator;
 
 @Entity
 public class CreditCardModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer creditCardModelId;
     private Long creditCardNumber;
-    private Integer limit;
-    private Boolean requiredCard;
+    private Integer moneyLimit;
 
     @ManyToOne
     BankAccountModel bankAccountModel;
 
-    public CreditCardModel() {
+    public Integer getCreditCardModelId() {
+        return creditCardModelId;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCreditCardModelId(Integer creditCardModelId) {
+        this.creditCardModelId = creditCardModelId;
     }
 
     public Long getCreditCardNumber() {
@@ -34,12 +29,12 @@ public class CreditCardModel {
         this.creditCardNumber = creditCardNumber;
     }
 
-    public Integer getLimit() {
-        return limit;
+    public Integer getMoneyLimit() {
+        return moneyLimit;
     }
 
-    public void setLimit(Integer limit) {
-        this.limit = limit;
+    public void setMoneyLimit(Integer moneyLimit) {
+        this.moneyLimit = moneyLimit;
     }
 
     public BankAccountModel getBankAccountModel() {
@@ -48,13 +43,5 @@ public class CreditCardModel {
 
     public void setBankAccountModel(BankAccountModel bankAccountModel) {
         this.bankAccountModel = bankAccountModel;
-    }
-
-    public Boolean getRequiredCard() {
-        return requiredCard;
-    }
-
-    public void setRequiredCard(Boolean requiredCard) {
-        this.requiredCard = requiredCard;
     }
 }
