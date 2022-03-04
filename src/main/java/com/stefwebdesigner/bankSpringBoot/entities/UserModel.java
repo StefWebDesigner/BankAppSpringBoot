@@ -15,7 +15,7 @@ public class UserModel {
     @Column
     private String password;
 
-//    @OneToMany
+//    @OneToManydddd
 //    BankAccountModel bankAccountModel;
 //    CreditCardModel creditCardModel;
 
