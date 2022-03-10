@@ -27,6 +27,16 @@ public class UserService {
         this.creditCardNumberRepository = creditCardNumberRepository;
     }
 
+    public UserModel login(String username, String password) {
+        Optional<UserModel> userModel = userRepo.findByUsername(username);
+        if(userModel.isPresent()) {
+            if(userModel.get().getPassword().equals(password)) {
+                return userModel.get();
+            }
+        }
+        return null;
+    }
+
     //GETTING USERID
     public UserModel getUserById(Integer id) {
         Optional<UserModel> userOptional = userRepo.findById(id);
@@ -84,3 +94,4 @@ public class UserService {
 
 
 }
+

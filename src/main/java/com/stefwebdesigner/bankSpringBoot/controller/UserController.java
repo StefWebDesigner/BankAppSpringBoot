@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/client")
 public class UserController {
@@ -28,6 +30,17 @@ public class UserController {
 
         return ResponseEntity.ok(userModel);
     }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password ) {
+        UserModel userModel = userService.login(username, password);
+        if(userModel == null) {
+            return ResponseEntity.ok("Login in failed");
+        }
+        return ResponseEntity.ok(userModel);
+    }
+
+
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public ResponseEntity<UserModel> save(@RequestBody UserModel userModel, @RequestParam String type, @RequestParam Boolean requiresCard) {
